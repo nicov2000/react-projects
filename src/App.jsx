@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { TwitterFollowCard } from './TwitterFollowCard';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App () {
+  // Un cambio de estado desencadena una re-renderizacion desde el componente hacia abajo (hijos)
+  // El codigo se re-ejecuta, pero el html sin cambios NO se re-renderiza
+  const users = [
+    {
+      id: 1,
+      userName: 'midudev',
+      isFollowing: true,
+      name: 'Miguel Angel Duran'
+    },
+    {
+      id: 2,
+      userName: 'nick',
+      isFollowing: true,
+      name: 'Nick Volves'
+    },
+    {
+      id: 3,
+      userName: 'tanjiro',
+      isFollowing: false,
+      name: 'Tanjiro Kamado'
+    },
+    {
+      id: 4,
+      userName: 'elonmusk',
+      isFollowing: true,
+      name: 'Elon Musk'
+    }
+  ]
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <section className='app'>
+        {
+        users.map(({ id, userName, isFollowing, name }) => (
+          <TwitterFollowCard key={id} userName={userName} initialIsFollowing={isFollowing}>{name}</TwitterFollowCard>
+        ))
+        }
+      </section>
+    )
 }
-
-export default App
